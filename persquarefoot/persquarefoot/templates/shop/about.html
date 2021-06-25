@@ -1,0 +1,134 @@
+{% extends  'shop/basic.html' %}
+{% load static %}
+{% block title %}About Us {% endblock %}
+
+
+{% block css %}
+<link rel="stylesheet" type="text/css" href="{% static 'shop/swiper/swiper.min.css' %}"/>
+{% endblock %}
+
+
+{% block style %}
+.collection{
+height: 460px;
+width: 100%;
+}
+.collection{
+background: #262626;
+}
+.swiper-container
+{
+width: 100%;
+padding-top: 20px;
+padding-bottom: 50px;
+}
+.swiper-slide
+{
+background-position: center;
+background-size: cover;
+width: 533px;
+height: 380px;
+background: #fff;
+}
+.swiper-slide .imgbx{
+width: 100%;
+height: 300px;
+overflow: hidden;
+}
+.swiper-slide .imgbx img{
+width: 100%;
+height: 90%;
+}
+.swiper-slide .details{
+box-sizing: border-box;
+
+padding: 20px;
+}
+.swiper-slide .details h3{
+margin: 0;
+padding: 0;
+font-size: 20px;
+text-align: center;
+line-height: 20px;
+}
+.swiper-slide .details h3 span{
+font-size: 16px;
+color: #ffc107;
+}
+
+
+{% endblock%}
+
+
+{% block body %}
+<div class="aboutus container">
+	<h2 style="font-weight: bold;text-shadow: 2px 2px #000000; font-size: 44px;" class="text-warning">About us..</h2>
+	<p style="font-size: 18px;"><br>PerSquareFoot is Sign and Display manufacturer and supplier with over 40,000 customers worldwide and Offices in India, United States of America, Australia and United Kingdom.
+		<br>Our customers includes retail stores, corporates, institutes as well as re-sellers and advertisement and Branding agencies. We offer customized solution and price point to all of our customers.
+		<br>Our philosophy is to deliver high quality products in timely manner at competitive prices to achieve highest customer satisfaction. We guarantee our product quality and strive to satisfy our customers and are proud of achieving over 96% in customer satisfaction (Independent survey of actual customers).
+		<br>Our in-house pre-press team and expert consultants offer our customers customized solutions from designing support to selecting a right product.
+		<br>With established business in international markets, we are thrilled to bring wide range of fine quality products from around the world in Indian market with competitive price. Top of the line equipment infrastructure integrated with latest technology and high volume production allow us to produce highest quality products at competitive price.
+		<br>Our products Type includes:
+		<ul style="font-size: 18px;">
+			<li>Flex banners – 1440 dpi eco-solvent with hot-air hem and eyelets</li>
+			<li>Mesh Banners – 1440 dpi eco solvent printing with hot-air hem and eyelets</li>
+			<li>Wide range for banner stands</li>
+			<li>Advertising flags</li>
+			<li>Custom Canopies/Tent</li>
+			<li>Trade-show back drop</li>
+			<li>CorFlute board signs</li>
+			<li>Wall fabric</li>
+			<li>Window vinyl signs and one-way vision signs</li>
+			<li>Magnetic signs</li>
+			<li>Decals and stickers</li>
+			<li>Vinyl lettering</li>
+			<li>Aluminium and acrylic signs</li>
+		</ul>
+		<br><p style="font-size: 18px;">For our retail customers we provide easy to use online designing and ordering at www.circleone.in and for our corporate customers, we have dedicated sales and customer service staff for quick and professional service.</p>
+	</p>
+</div>
+<br>
+<!--...................................collection..........................-->
+<div class="collection">
+
+	<div class="swiper-container">
+		<div class="swiper-wrapper">
+			{% for i in product %}
+			<div class="swiper-slide" >
+				<div class="imgbx">
+					<img src="../../{{ i.thumbnail }}">
+				</div>
+				<div style="color:black;" class="details">
+					<h3>{{ i.product_name }}<br><span>({{ i.category }})</span></h3>
+				</div>
+			</div>
+			{% endfor %}
+		</div>
+		<!-- Add Pagination -->
+		<div class="swiper-pagination"></div>
+	</div>
+</div>
+{% endblock %}
+
+
+{% block script %}
+<script src="{% static 'shop/swiper/swiper.min.js' %}"></script>
+<script>
+	var swiper = new Swiper('.swiper-container', {
+	effect: 'coverflow',
+	grabCursor: true,
+	centeredSlides: true,
+	slidesPerView: 'auto',
+	coverflowEffect: {
+	rotate: 50,
+	stretch: 0,
+	depth: 400,
+	modifier: 1,
+	slideShadows : true,
+	},
+	pagination: {
+	el: '.swiper-pagination',
+	},
+	});
+	</script>
+{% endblock %}

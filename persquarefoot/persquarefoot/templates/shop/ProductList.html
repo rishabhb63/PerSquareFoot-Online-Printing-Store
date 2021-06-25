@@ -1,0 +1,72 @@
+{% extends  'shop/basic.html' %}
+{% load static %}
+{% block title %}Product list -Persquarefoot {% endblock %}
+
+
+{% block css %}
+{% endblock %}
+
+
+{% block style %}
+
+
+
+{% endblock%}
+
+
+{% block body %}
+<div class="container">
+    <h2 style="font-weight: bold;text-shadow: 2px 2px #000000; font-size: 44px;" class="text-warning">PerSquareFoot -Online Printing Store</h2>
+    <h4 style="font-weight: bold;text-shadow: 2px 2px #000000; font-size: 44px;" class="text-warning">Outdoor Signage</h4>
+    {% for i in product1 %}
+                    {{ i.product_name }}
+                <img src="../../{{ i.thumbnail }}" class="card-img img-fluid">
+                    {{ i.desc }}
+                <br/>
+
+    {% endfor %}
+    <hr/>
+    <h4 style="font-weight: bold;text-shadow: 2px 2px #000000; font-size: 44px;" class="text-warning">Indoor Signage</h4>
+    {% for i in product2 %}
+                    {{ i.product_name }}
+                <img src="../../{{ i.thumbnail }}" class="card-img img-fluid">
+                    {{ i.desc }}
+                <br/>
+
+    {% endfor %}
+    <hr/>
+    <h4 style="font-weight: bold;text-shadow: 2px 2px #000000; font-size: 44px;" class="text-warning">other S</h4>
+    {% for i in product3 %}
+                    {{ i.product_name }}
+                <img src="../../{{ i.thumbnail }}" class="card-img img-fluid">
+                    {{ i.desc }}
+                <br/>
+
+    {% endfor %}
+    <hr/>
+    <h4 style="font-weight: bold;text-shadow: 2px 2px #000000; font-size: 44px;" class="text-warning">Promotional</h4>
+    {% for i in product4 %}
+                    {{ i.product_name }}
+                <img src="../../{{ i.thumbnail }}" class="card-img img-fluid">
+                    {{ i.desc }}
+                <br/>
+
+    {% endfor %}
+    <hr/>
+    <h4 style="font-weight: bold;text-shadow: 2px 2px #000000; font-size: 44px;" class="text-warning">Alphabet</h4>
+    {% for i in product5 %}
+                    {{ i.product_name }}
+                <img src="../../{{ i.thumbnail }}" class="card-img img-fluid">
+                    {{ i.desc }}
+                <br/>
+
+    {% endfor %}
+    <hr/>
+</div>
+<br>
+
+{% endblock %}
+
+
+{% block script %}
+{% endblock %}
