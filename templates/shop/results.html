@@ -1,0 +1,37 @@
+{% extends 'shop/basic.html' %}
+
+{% block title%} Search - PersquareFoot {% endblock %}
+{% block css %} {% endblock %}
+{% block style %} {% endblock %}
+{% block body %}
+
+<h1>Searched for: {{ query }}</h1>
+<table class="table container">
+    <thead>
+    <th></th>
+    <th>Product</th>
+    </thead>
+    <tbody>
+    {% for product in products %}
+    <tr>
+        <td style="width:220px; height:220px">
+
+            <div>
+                <a href="{{ product.get_absolute_url }}">
+                    <img style="width:220px; height:220px" src="../../{{ product.thumbnail }}" ></a>
+            </div>
+        </td>
+        <td>
+            <a href="{{ product.get_absolute_url }}"> {{ product }}</a>
+        </td>
+    </tr>
+    {% endfor %}
+    </tbody>
+
+</table>
+
+
+{% endblock %}
+
+{% block script %}
+{% endblock %}

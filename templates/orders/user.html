@@ -1,0 +1,18 @@
+{% extends  'shop/basic.html' %}
+{% load static %}
+{% block title %}Product list -Persquarefoot {% endblock %}
+
+{% block css %}{% endblock %}
+
+
+{% block style %}{% endblock%}
+
+
+{% block body %}
+<div class="container">
+{{ user.order_set.all }}
+    </div>
+{% endblock %}
+
+
+{% block script %}{% endblock %}

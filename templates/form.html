@@ -1,0 +1,27 @@
+{% extends  'shop/basic.html' %}
+{% load static %}
+{% block title %}User -Persquarefoot {% endblock %}
+
+
+{% block css %}
+{% endblock %}
+
+
+{% block style %}
+
+{% endblock %}
+
+
+{% block body %}
+<div class="container" style="margin-top:80px;margin-bottom:80px;">
+    <h2>{{ form_title }}</h2>
+    <form method="POST" action="">{% csrf_token %}
+            {{ form.as_p }}
+        <input type="submit" value='{% if submit_btn %} {{ submit_btn }}  {% else %}Submit{% endif %}' class="btn btn-outline-warning"/>
+    </form>
+</div>
+{% endblock %}
+
+
+{% block script %}
+{% endblock %}

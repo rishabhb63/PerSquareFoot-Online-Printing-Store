@@ -1,0 +1,498 @@
+{% extends  'shop/basic.html' %}
+{% load static %}
+{% block title %}PerSquareFoot-Online Printing Website {% endblock %}
+
+{% block css %}
+<link rel="stylesheet" type="text/css" href="{% static 'shop/swiper/swiper.min.css' %}"/>
+
+{% endblock %}
+
+
+{% block style %}
+.bgimg{
+background-size: 100% 100%;
+background-attachment: fixed;
+width: 100%;
+height: 660px;
+}
+.collection{
+height: 460px;
+width: 100%;
+}
+.collection{
+background: #262626;
+}
+.swiper-container
+{
+width: 100%;
+padding-top: 20px;
+padding-bottom: 50px;
+}
+.swiper-slide
+{
+background-position: center;
+background-size: cover;
+width: 533px;
+height: 380px;
+background: #fff;
+}
+.swiper-slide .imgbx{
+width: 100%;
+height: 300px;
+overflow: hidden;
+}
+.swiper-slide .imgbx img{
+width: 100%;
+height: 90%;
+}
+.swiper-slide .details{
+box-sizing: border-box;
+
+padding: 20px;
+}
+.swiper-slide .details h3{
+margin: 0;
+padding: 0;
+font-size: 20px;
+text-align: center;
+line-height: 20px;
+}
+.swiper-slide .details h3 span{
+font-size: 16px;
+color: #ffc107;
+}
+.newsform{
+background-image: url("{% static 'shop/img/blue back.jpg' %}");
+border: 3px solid #f1f1f1;
+font-family: Arial;
+padding: 30px;
+width: 100%;
+}
+.newsletter {
+padding: 30px;
+}
+.newsletter h2{
+font-weight: bold;
+}
+input[type=text], input[type=submit] {
+width: 100%;
+padding: 12px;
+margin: 8px 0;
+display: inline-block;
+border: 1px solid #ccc;
+box-sizing: border-box;
+}
+input[type=checkbox] {
+margin-top: 16px;
+}
+input[type=submit] {
+background-color: #ffc107;
+color: white;
+border: none;
+}
+input[type=submit]:hover {
+opacity: 0.8;
+}
+.col-md-3 {
+display: inline-block;
+margin-left: -4px;
+}
+.col-md-3 {
+width: 100%;
+height: auto;
+}
+body .carousel-control-indicator li {
+background-color: blue;
+}
+body .carousel-control-prev-icon body .carousel-control-next-icon {
+background-color: blue;
+}
+body .no-padding {
+padding-left: 0;
+padding-right: 0;
+}
+.carousel-control-prev-icon {
+background: black no-repeat center center;
+background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='%23fff' viewBox='0 0 8 8'%3e%3cpath d='M5.25 0l-4 4 4 4 1.5-1.5-2.5-2.5 2.5-2.5-1.5-1.5z'/%3e%3c/svg%3e");
+}
+.carousel-control-next-icon {
+background: black no-repeat center center;
+background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='%23fff' viewBox='0 0 8 8'%3e%3cpath d='M2.75 0l-1.5 1.5 2.5 2.5-2.5 2.5 1.5 1.5 4-4-4-4z'/%3e%3c/svg%3e");
+}
+body .carousel-indicators{
+bottom:0;
+}
+.carousel-indicators .active{
+background-color: blue;
+}
+.carousel-control-prev{
+margin-left: -200px;
+}
+.carousel-control-next{
+margin-right: -200px;
+}
+.card{
+margin-top: 50px;
+}
+.card img{
+padding-left: 50px;
+padding-right: 50px;
+padding-top: 30px;
+height: 150px;
+}
+.inner{
+overflow: hidden;
+}
+.inner img{
+
+transition: all 1.2s ease;
+}
+.inner:hover img{
+transform: scale(1.5);
+}
+.header {
+    background-color:#262626;
+	color: white;
+    padding: 2px;
+    cursor: pointer;
+}
+.content {
+    display: none;
+    padding : 5px;
+}
+{% endblock%}
+
+
+{% block body %}
+<div class="bgimg">
+</div>
+  <div class="container text-right headerset ">
+	  <h1 style="font-weight: bold; text-shadow: 1px 1px #ffffff;font-family: Monotype Corsiva; " class="ml10 a1">
+  <span class="text-wrapper">
+    <span class="letters">PerSquareFoot- Online Printing Store</span>
+  </span>
+</h1>
+	  <h1 style="font-weight: bold; text-shadow: 1px 1px #ffffff;font-family: Monotype Corsiva;" class="ml1">
+  <span class="text-wrapper">
+    <span class="line line1"></span>
+    <span class="letters">- Bhagat Enterprises</span>
+    <span class="line line2"></span>
+  </span>
+</h1>
+	  <h3 class="ml3">Customize them according to your satisfaction</h3>
+	  		{% if user.is_authenticated %}
+	  		<a href="{% url 'cart' %}" class="btn-warning text-white btn-lg" style="text-shadow: 1px 1px #000000; width: 250px;text-decoration:none;">Move to Cart</a>
+
+	  		{% else %}
+	  		<a href="/accounts/register/" class="btn-warning text-white btn-lg" style="text-shadow: 1px 1px #000000; width: 250px;">Register</a>
+			{% endif %}
+
+			</div>
+
+<!--.......................ourservices.........................................-->
+<section class="container ourservices text-center">
+			<h1>SERVICES</h1>
+			<p>Shop Different items and get amazing deals on your next purchase</p>
+
+			<div class="row rowsetting">
+				<div class="col-lg-4 col-md-4 col-sm-4 col-10 d-block m-auto">
+					<div class="imgsetting d-block m-auto bg-warning"><i class="fa fa-truck fa-3x"></i>
+					</div>
+					<h2>FREE SHIPPING</h2>
+					<p>You can now customize your banners in a few simple steps online.
+					Our banner designer provides you the tools to customize any banner to the minutest detail. You can now customize on the go as you upload images, add text and art.</p>
+
+				</div>
+				<div class="col-lg-4 col-md-4 col-sm-4 col-10 d-block m-auto">
+					<div class="imgsetting d-block m-auto bg-warning"><i class="fa fa-eye-slash fa-3x"></i>
+					</div>
+					<h2>Secure Payment</h2>
+					<p>You can now customize your banners in a few simple steps online.
+					Our banner designer provides you the tools to customize any banner to the minutest detail. You can now customize on the go as you upload images, add text and art.</p>
+
+				</div>
+				<div class="col-lg-4 col-md-4 col-sm-4 col-10 d-block m-auto">
+					<div class="imgsetting d-block m-auto bg-warning"><i class="fa fa-tags fa-3x "></i>
+					</div>
+					<h2>Best Offers</h2>
+					<p>You can now customize your banners in a few simple steps online.
+					Our banner designer provides you the tools to customize any banner to the minutest detail. You can now customize on the go as you upload images, add text and art.</p>
+
+				</div>
+
+			</div>
+
+		</section>
+
+<!--...................................portfolio..................................-->
+<div class="portfolio bg-light">
+	<div class="container">
+		<h1> PerSquareFoot- Online Printing Store</h1>
+		<h5>You are at the right place if you are looking for quality Banners, Signs and Displays...</h5>
+		<br>
+		<br>
+		<!--        slideshow starts here-->
+		{% for product, range, nSlides in allProds %}
+		<h2 style="text-align: left; text-shadow: 1px 1px #ffc106;" >{{ product.0.category }}</h2>
+         <div id="demo{{forloop.counter}}" class="carousel slide my-3" data-ride="carousel">
+    		<ul class="carousel-indicators">
+            <li data-target="#demo{{forloop.counter}}" data-slide-to="0" class="active"></li>
+    			{% for i in range %}
+      <li data-target="#demo{{forloop.parentloop.counter}}" data-slide-to="{{i}}" ></li>
+      {% endfor %}
+		</ul>
+
+      <div class="carousel-inner bg-light">
+        <div class="carousel-item active">
+
+            {% for i in product %}
+            <div class="col-xs-3 col-sm-3 col-md-3">
+              <div class="card">
+							<div class="inner">
+								<img src="../{{ i.thumbnail }}" class="card-img img-fluid">
+
+							</div>
+
+							<div class="card-body">
+								<h3 class="card-title">{{ i.product_name }}</h3>
+								<p class="card-text">
+									<div class="header"><span>Description</span>
+
+    								</div>
+										<div class="content">
+											{{ i.desc }}
+										</div>
+								</p>
+								<a href="/shop/products/{{i.id}}"><button id="qv{{i.id}}" class="btn btn-primary">Quick View</button></a>
+
+							</div>
+
+						</div>
+            </div>
+
+            {% if forloop.counter|divisibleby:4 and forloop.counter > 0 and not forloop.last %}
+             </div><div class="carousel-item">
+            {% endif%}
+
+            {% endfor %}
+      </div>
+      </div>
+
+      <a class="carousel-control-prev " href="#demo{{forloop.counter}}" role="button" data-slide="prev">
+   <span class="carousel-control-prev-icon" aria-hidden="true" ></span>
+    <span class="sr-only">Previous</span>
+  </a>
+  <a class="carousel-control-next" href="#demo{{forloop.counter}}" role="button" data-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="sr-only">Next</span>
+  </a>
+			 </div>
+			 {% endfor %}
+      </div>
+	</div>
+
+	</div>
+
+
+<!--...............................................About us...........................-->
+<div class="row">
+			<div class="column1" style="background-color:#ffffff;">
+				<h2 style="text-shadow: 1px 1px #000000;">PerSquareFoot- Online Printing Store</h2>
+				<h3>You are at the right place if you are looking for quality Banners, Signs and Displays...</h3>
+				<p>If you are looking for some effective advertising for your company, you are at the right place. We offer you the best of vinyl banners and signs to advertise your business in the best possible manner. In these competitive times, it is very important to get a new and relevant advertising tool to keep your target audiences engaged. PerSquareFoot makes that possible for you!<br>
+					We have advertising flags and decals. You can even use stickers, magnetic signs and many others to advertise your business. We also sell banner stands and cloth covers as add-ons for successful campaigning for your business promotion and marketing. Though there are many new forms of advertising coming up, the banners can't be ignored as they are still one of the best tools to target the daily commuters on the crossroads and high traffic areas.<br>
+				Our USP is high quality with low prices. However, you can rest assured as in spite of the cheap price, we strive to maintain the quality which ensures the banner is durable and withstands the weather conditions. We use the best fabrics and paint which makes us the best brand of banners and signs in the online market.</p>
+				<h3>Customize on the go</h3>
+				<p>You can now customize your banners in a few simple steps online.<br>
+				Our banner designer provides you the tools to customize any banner to the minutest detail. You can now customize on the go as you upload images, add text and art. This is the best way to have your idea put up on the banner as rather than explaining it to someone; you are designing it by yourself which is easier as well as fast.</p>
+			</div>
+			<div class="column2" style="background-color:#ffffff;">
+				<h2 style="text-shadow: 1px 1px #000000;">Why Shop With Us...</h2>
+				<h3>Best Price Guarantee</h3>
+				<p>PerSquareFoot has a large inventory, which allows us to offer very competitive prices, giving you the best deal for your sign and banner printing. We are confident that you will find the best prices here, but if you find a better deal, let us know! We will match their offer and give an additional 10 percent off the order, ensuring that you get your banner at an outstanding rate.</p>
+				<h3>Free Design Proofs</h3>
+				<p>When you are done with designing the banner or sign you can send it to us for sign & banner printing, which will be done exactly the way you have designed it. Our team would make sure and add all the graphics, text and print the banner as per your desire. Once printed these banners are ready to be shipped. We pack them in the best possible manner to avoid breakage and ship them to the address provided. This done and you will receive your customized banner to your door step.</p>
+				<h3>100% Quality Guarantee</h3>
+				<p>Our philosophy is to deliver high quality products in timely manner at competitive prices to achieve highest customer satisfaction. We guarantee our product quality and strive to satisfy our customers.</p>
+			</div>
+		</div>
+
+<!--...................................collection..........................-->
+<div class="collection">
+
+	<div class="swiper-container">
+		<div class="swiper-wrapper">
+			{% for i in products %}
+			<div class="swiper-slide" >
+				<div class="imgbx">
+					<img src="../{{ i.thumbnail }}">
+				</div>
+				<div style="color:black;" class="details">
+					<h3>{{ i.product_name }}<br><span>({{ i.category }})</span></h3>
+				</div>
+			</div>
+			{% endfor %}
+		</div>
+		<!-- Add Pagination -->
+		<div class="swiper-pagination"></div>
+	</div>
+</div>
+
+<!--...................................newsletter..........................-->
+<div class="newsform newsletter">
+	<div class="container">
+	<h2 style="text-align:left;">Subscribe to get regular updates</h2>
+	<p>Get e-mail updates about our latest offers and special products.</p>
+	<form action="{% url "Newsletter" %}" method="POST">{% csrf_token %}
+		  <div class="form-group">
+			<label for="myname">Name</label>
+			<input type="text" class="form-control" id="myname" name='myname' placeholder="Enter Your Name" required>
+		  </div>
+		  <div class="form-group">
+			<label for="myemail">Email</label>
+			<input type="email" class="form-control" id="myemail" name='myemail' placeholder="Enter Your Email" required>
+			  <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+
+		  </div>
+		<div class="form-group">
+			<input type="checkbox" class="form-check-input" id="daily" name="daily">
+			<label class="form-check-label" for="daily" >Daily Newsletter</label>
+		</div>
+
+		<button type="submit" class="btn btn-outline-warning btn-block" id="subscribe" value="Subscribe" >Submit</button>
+		</div>
+	</form>
+	  </div>
+
+{% endblock %}
+
+
+{% block script %}
+<script src="{% static 'shop/swiper/swiper.min.js' %}"></script>
+
+<script>
+  function showAlert() {
+    alert ("Submitted SUCCESSFULLY ...");
+  }
+  </script>
+<script>
+	var swiper = new Swiper('.swiper-container', {
+	effect: 'coverflow',
+	grabCursor: true,
+	centeredSlides: true,
+	slidesPerView: 'auto',
+	coverflowEffect: {
+	rotate: 50,
+	stretch: 0,
+	depth: 400,
+	modifier: 1,
+	slideShadows : true,
+	},
+	pagination: {
+	el: '.swiper-pagination',
+	},
+	});
+	</script>
+<script>
+	var textWrapper = document.querySelector('.ml10 .letters');
+textWrapper.innerHTML = textWrapper.textContent.replace(/\S/g, "<span class='letter'>$&</span>");
+
+anime.timeline({loop: true})
+  .add({
+    targets: '.ml10 .letter',
+    rotateY: [-90, 0],
+    duration: 1300,
+    delay: (el, i) => 45 * i
+  }).add({
+    targets: '.ml10',
+    opacity: 0,
+    duration: 1000,
+    easing: "easeOutExpo",
+    delay: 7000
+  });
+	</script>
+<script>
+  var textWrapper = document.querySelector('.ml3');
+textWrapper.innerHTML = textWrapper.textContent.replace(/\S/g, "<span class='letter'>$&</span>");
+
+anime.timeline({loop: true})
+  .add({
+    targets: '.ml3 .letter',
+    opacity: [0,1],
+    easing: "easeInOutQuad",
+    duration: 2250,
+    delay: (el, i) => 150 * (i+1)
+  }).add({
+    targets: '.ml3',
+    opacity: 0,
+    duration: 1000,
+    easing: "easeOutExpo",
+    delay: 1000
+  });
+  </script>
+<script>
+	  var textWrapper = document.querySelector('.ml1 .letters');
+textWrapper.innerHTML = textWrapper.textContent.replace(/\S/g, "<span class='letter'>$&</span>");
+
+anime.timeline({loop: true})
+  .add({
+    targets: '.ml1 .letter',
+    scale: [0.3,1],
+    opacity: [0,1],
+    translateZ: 0,
+    easing: "easeOutExpo",
+    duration: 600,
+    delay: (el, i) => 70 * (i+1)
+  }).add({
+    targets: '.ml1 .line',
+    scaleX: [0,1],
+    opacity: [0.5,1],
+    easing: "easeOutExpo",
+    duration: 700,
+    offset: '-=875',
+    delay: (el, i, l) => 80 * (l - i)
+  }).add({
+    targets: '.ml1',
+    opacity: 0,
+    duration: 1000,
+    easing: "easeOutExpo",
+    delay: 8000
+  });
+  </script>
+<script>
+	if (window.innerWidth > 900) {
+    var images = ["1.jpg", "2.jpg", "3.jpg", "4.jpg", "5.jpg"];
+    $(function () {
+        var i = 0;
+        $(".bgimg").css("background-image", "url('/static/shop/img/" + images[i] +"')");
+        setInterval(function () {
+            i++;
+            if (i == images.length) {
+                i = 0;
+            }
+            $(".bgimg").fadeOut("slow", function () {
+                $(this).css("background-image", "url('/static/shop/img/" + images[i] +"')");
+                $(this).fadeIn("slow");
+            });
+        }, 5000);
+    });}
+</script>
+<script>
+$(".header").click(function () {
+
+    $header = $(this);
+    //getting the next element
+    $content = $header.next();
+    //open up the content needed - toggle the slide- if visible, slide up, if not slidedown.
+    $content.slideToggle(500, function () {
+        //execute this after slideToggle is done
+        //change text of header based on visibility of content div
+        $header.text(function () {
+            //change text based on condition
+            return $content.is(":visible") ? "Read less.." : "Description";
+        });
+    });
+
+});
+</script>
+{% endblock %}

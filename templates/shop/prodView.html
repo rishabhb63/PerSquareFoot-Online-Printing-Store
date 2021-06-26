@@ -1,0 +1,241 @@
+{% extends 'shop/basic.html' %}
+{% load static %}
+{% block title%} {{product.product_name}} - PersquareFoot {% endblock %}
+{% block css %}
+<link rel="stylesheet" type="text/css" href="{% static 'shop/css/prodView.css' %}"/>
+<link rel="stylesheet" type="text/css" href="{% static 'shop/css/lightbox.min.css' %}"/>
+<link rel="stylesheet" type="text/css" href="{% static 'shop/css/gallery.css' %}"/>
+{% endblock %}
+{% block style %}
+/*............................................responsive..........................*/
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+.gallery{
+	margin: 10px 50px!important;
+}
+.navbar-toggler{
+	font-size: 20px;
+}
+.mbr-section-title{
+	font-size: 24px!important;
+}
+.mbr-section-subtitle{
+	font-size: 16px!important;
+}
+
+.formhead{
+	display: none;
+}
+
+.divisiondiv {
+    display: flex;
+    flex-direction: column; /* For vertical placement of items */
+    height: 2500px;
+  }
+  #divleft {
+    height: 1500px!important;
+    order: 1;
+    width: 100%!important;
+  }
+#divright{
+order: 2;
+width: 75%!important;
+height: 1500px!important;
+margin-left: 25px;
+}
+.tab-content{
+	margin:0px 0px!important;
+}
+.form-group label{
+width: 100%;
+font-size: 16px;
+}
+
+.col-xs-4{
+	width: 100%;
+}
+#divright button{
+left: -30px!important;
+}
+
+{% endblock %}
+{% block body %}
+
+<div class="gallery">
+
+			<a href="../../{{product.image1}}" data-lightbox="mygallery" data-title="{{product.product_name}}"><img src="../../{{product.image1}}"></a>
+			<a href="../../{{product.image2}}" data-lightbox="mygallery" data-title="{{product.product_name}}"><img src="../../{{product.image2}}"></a>
+			<a href="../../{{product.image3}}" data-lightbox="mygallery" data-title="{{product.product_name}}"><img src="../../{{product.image3}}"></a>
+			<a href="../../{{product.image4}}" data-lightbox="mygallery" data-title="{{product.product_name}}"><img src="../../{{product.image4}}"></a>
+</div>
+<div class="container">
+			<h2 style="font-size: 34px; font-weight: 400;text-align:center;" class="mbr-section-title align-center pb-3 mbr-fonts-style display-2">{{product.product_name}}</h2>
+			<h3 style="font-size: 24px;text-align:center;" class="mbr-section-subtitle  display-5 align-center mbr-light mbr-fonts-style">{{product.desc}}</h3>
+</div>
+
+<div class="divisiondiv">
+	<div id="divleft">
+		<ul style="margin:40px 40px;" class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+  <li class="my-nav-item" role="presentation">
+    <a class="my-nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">Description</a>
+  </li>
+  <li class="my-nav-item" role="presentation">
+    <a class="my-nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">Specification</a>
+  </li>
+  <li class="my-nav-item" role="presentation">
+    <a class="my-nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="false">Price</a>
+  </li>
+</ul>
+<div style="text-align:center;" class="tab-content" id="pills-tabContent">
+  <div style="margin: 0px 40px;" class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">{{product.description_1|linebreaks}}</div>
+  <div style="margin: 40px 40px;" class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">{{product.description_2|linebreaks}}</div>
+  <div style="margin: 40px 40px;" class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">{{product.description_3|linebreaks}}</div>
+</div>
+	</div>
+
+
+<div id="divright">
+
+	<form style="left: 100%; text-align:center;padding: 80px 150px;" class="form" method="POST" action="{% url 'add_to_cart' product.id %}">
+                {% csrf_token %}
+                    <label style="float: left;width: 10em;margin-right: 1em;margin-top: 1em;" for="qty">Quantity</label>
+                    <input id="qty" class="form-control" name="qty" type="number" value="1"/>
+                        {% if product.variation_set.all %}
+
+
+                        {% if product.variation_set.sizes %}
+                        <label style="float: left;width: 10em;margin-right: 1em;margin-top: 1em;" for="size">Size</label>
+                        <select id="size" class="form-control" name="size">
+                            {% for item in product.variation_set.sizes %}
+                            <option value="{{ item.title|lower }}">{{ item.title|capfirst }}</option>
+                            {% endfor %}
+                        </select>
+                        {% endif %}
+
+                        {% if product.variation_set.Select_Option %}
+                         <label style="float: left;width: 10em;margin-right: 1em;margin-top: 1em;" for="size">Select Options</label>
+                        <select class="form-control" name="Select_Option">
+                            {% for item in product.variation_set.Select_Option %}
+                            <option value="{{ item.title|lower }}">{{ item.title|capfirst }}</option>
+                            {% endfor %}
+                        </select>
+                        {% endif %}
+
+                        {% if product.variation_set.Two_Sided %}
+                         <label style="float: left;width: 10em;margin-right: 1em;margin-top: 1em;" for="size">Two Sided Banner</label>
+                        <select class="form-control" name="Two_Sided">
+                            {% for item in product.variation_set.Two_Sided %}
+                            <option value="{{ item.title|lower }}">{{ item.title|capfirst }}</option>
+                            {% endfor %}
+                        </select>
+                        {% endif %}
+
+                        {% if product.variation_set.Premium %}
+                         <label style="float: left;width: 12em;margin-right: 1em;margin-top: 1em;" for="size">Upgrade to Premium ?
+
+                             <a data-toggle="modal" data-target="#exampleModalCenter">
+ <i class="fa fa-question-circle"></i>
+                             </a>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+        <div style="text-align: left;font-size: small;" class="modal-body">
+              <p style="font-size: 14px;"> <b>510 GSM(Normal Flex) :</b>
+                <br>510 GSM material is more durable and heavy compared to 340 GSM.  It will add strength and life to your banner. Recommended for outdoor use.
+                <br>
+                <br><br><b>UV Print(Star Flex) :</b>
+                <br>Full-Color Eco-friendly UV Printing with LED curing at 1000 DPI (Dots per inch).
+              Recommended for: Best color match, clarity, and longer print life.</p>
+            </div>
+    </div>
+  </div>
+</div>
+
+                         </label>
+                        <select style="width:50%" class="form-control" name="Premium">
+                            {% for item in product.variation_set.Premium %}
+                            <option value="{{ item.title|lower }}">{{ item.title|capfirst }}</option>
+                            {% endfor %}
+                        </select>
+                        {% endif %}
+
+                        {% if product.variation_set.Hanging_Options %}
+                         <label style="float: left;width: 10em;margin-right: 1em;margin-top: 1em;" for="size">Hanging Options
+                            <a data-toggle="modal" data-target="#exampleModalCenter2">
+ <i class="fa fa-question-circle"></i>
+                             </a>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModalCenter2" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+        <div style="text-align: left;font-size: small;" class="modal-body">
+              <p><img style="height: 140px;width: 140px;" align="left" src="{% static 'shop/img/1.a.jpg' %}">
+                <p style="padding-left: 170px;"><b>Ultra-strong Adhesive Tabs ( Recommended ) :</b> Made of a high strength composite film. Stronger than metal grommets. More effective visual effect as they blend into the banner.</p></p>
+                <br><br><br>
+                <p><img style="height: 140px;width: 140px;" align="left" src="{% static 'shop/img/1.b.jpg' %}">
+                  <p style="padding-left: 170px;"><b>Metal Grommets:</b>  Made from Heavy Duty Brass. They are set in place onto a punched hole creating a secure and strong edge.</p></p>
+                  <br><br><br><br>
+                  <p><img style="height: 140px;width: 140px;" align="left" src="{% static 'shop/img/1.c.jpg' %}">
+                    <p style="padding-left: 170px;"><b>Pole Pockets:</b> Created by folding and sealing approx 3" extra material outside the actual banner size towards the back of the banner, thus creating a pocket-sleeve where a pole or a rod can slide into.</p></p>
+                  </div>
+    </div>
+  </div>
+</div>
+
+
+                         </label>
+                        <select class="form-control" name="Hanging_Options">
+                            {% for item in product.variation_set.Hanging_Options %}
+                            <option value="{{ item.title|lower }}">{{ item.title|capfirst }}</option>
+                            {% endfor %}
+                        </select>
+                        {% endif %}
+
+                        {% if product.variation_set.Lamination %}
+                         <label style="float: left;width: 10em;margin-right: 1em;margin-top: 1em;" for="size">Lamination ?</label>
+                        <select class="form-control" name="Lamination">
+                            {% for item in product.variation_set.Lamination %}
+                            <option value="{{ item.title|lower }}">{{ item.title|capfirst }}</option>
+                            {% endfor %}
+                        </select>
+                        {% endif %}
+
+                        {% if product.variation_set.Wind_Flaps %}
+                         <label style="float: left;width: 10em;margin-right: 1em;margin-top: 1em;" for="size">Wind Flaps ?</label>
+                        <select class="form-control" name="Wind_Flaps">
+                            {% for item in product.variation_set.Wind_Flaps %}
+                            <option value="{{ item.title|lower }}">{{ item.title|capfirst }}</option>
+                            {% endfor %}
+                        </select>
+                        {% endif %}
+
+                        {% if product.variation_set.Accessories %}
+                         <label style="float: left;width: 10em;margin-right: 1em;margin-top: 1em;" for="size">Accessories</label>
+                        <select class="form-control" name="Accessories">
+                            {% for item in product.variation_set.Accessories %}
+                            <option value="{{ item.title|lower }}">{{ item.title|capfirst }}</option>
+                            {% endfor %}
+                        </select>
+                        {% endif %}
+
+
+                        {% endif %}
+			<input class="form control btn btn-primary btn-block" type="submit" value="Add to cart"/>
+            </form>
+
+
+</div>
+</div>
+
+
+{% endblock %}
+
+
+
+
+{% block script %}
+<script src="{% static 'shop/js/lightbox-plus-jquery.min.js' %}"></script>
+{% endblock %}

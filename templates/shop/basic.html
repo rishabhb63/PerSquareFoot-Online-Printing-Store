@@ -1,0 +1,437 @@
+<!doctype html>
+<html lang="en">
+{% load static %}
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>{% block title %} {% endblock %}</title>
+    <!-- Bootstrap CSS -->
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+	  <link rel="stylesheet" type="text/css" href="{% static 'shop/css/index.css' %}"/>
+
+        {% block css %}   {% endblock%}
+<script src="https://js.stripe.com/v3/"></script>
+  </head>
+  <style>
+    .alert {
+    position: relative;
+    padding: .75rem 1.25rem;
+    margin-bottom: 0;
+    border: 1px solid transparent;
+    border-radius: .25rem;
+    }
+    .dropdown-menu {
+    margin-top: 0;
+    background-color: #262626;
+
+    font-size: 16px;
+	}
+	.dropdown-menu .dropdown-toggle::after {
+    vertical-align: middle;
+    border-left: 4px solid;
+    border-bottom: 4px solid transparent;
+    border-top: 4px solid transparent;
+
+	}
+	.dropdown-menu .dropdown .dropdown-menu {
+		left: 100%;
+		top: 0%;
+		margin:0 20px;
+		border-width: 0;
+	}
+	.dropdown-menu .dropdown .dropdown-menu.left {
+		right: 100%;
+		left: auto;
+	}
+
+	.dropdown-menu > li a:hover,
+	.dropdown-menu > li.show {
+		background: #262626;
+		color: #ffc107!important;
+	}
+	.dropdown-menu > li.show > a{
+		color: white;
+	}
+	.nav-item > a:hover {
+	  color: #ffc107!important;
+	}
+
+	.navbar-nav > .active > a {
+	  color: #ffffff;
+	  background-color: #ffc107;
+	}
+	 .nav-item > a:hover {
+	  background-color: #262626;
+	  color: white;
+	}
+
+	@media (min-width: 768px) {
+		.dropdown-menu .dropdown .dropdown-menu {
+			margin:0;
+			border-width: 1px;
+
+		}
+		.navbar a{
+			margin-left: 0px;
+		}
+	}
+	.alert-top-message{
+		display: none;
+	}
+	.alert{
+		padding: 10px 250px;
+	}
+
+       {% block style %}   {% endblock%}
+  </style>
+  <body>
+  {% if messages %}
+  	{% for message in messages %}
+	  <div class="alert alert-dismissible fade show {% if 'success' in message.tags %} alert-success {% elif 'warning' in message.tags %} alert-warning {% elif 'error' in message.tags %} alert-danger {% endif %}" role="alert">
+
+		  <b>{% if 'safe' in message.tags %} {{ message|safe }} {% else %} {{ message }} {% endif %} </b>
+
+		  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+			<span aria-hidden="true">&times;</span>
+		  </button>
+	  </div>
+  	{% endfor %}
+  {% endif %}
+    <div class="top-bar" style="background-color:#fff3CD;position: relative;padding: .1rem 1.25rem;border: 1px solid transparent;border-radius: .25rem;color: #856404;background-color: #fff3cd;border-color: #ffeeba;" >
+  <div class="col-lg-12 d-block">
+						<div class="row d-flex top-row">
+							<div class="col-md pr-4 d-flex topper align-items-center">
+								<div class="icon mr-2 d-flex justify-content-center align-items-center"><i class="fas fa-phone-alt" style="font-size:16px"></i></div>
+								<span  class="text text-dark">+919835321223</span>
+							</div>
+							<div class="col-md pr-4 d-flex topper align-items-center">
+								<div class="icon mr-2 d-flex justify-content-center align-items-center"><i class="fa fa-paper-plane" style="font-size:16px"></i></div>
+								<span   class="text text-dark">bhagat.entp@rediffmail.com</span>
+							</div>
+							<div class="col-md-5 pr-4 d-flex topper align-items-center text-lg-right">
+                                <span   class="text text-dark">5-6 Business days delivery</span>
+							</div>
+							<div class="col-md pr-4 d-flex topper align-items-center">
+								<div class="icon mr-2 d-flex justify-content-center align-items-center"><i class="fa fa-map-marker" style="font-size:16px"></i></div>
+								<span style="font-weight: 700;"  class="text text-dark">BHAGAT ENTERPRISES</span>
+							</div>
+						</div>
+					</div>
+
+  </button>
+</div>
+    <!-- ......................................................................................................................... -->
+    <nav style="background-color: #262626;" class="navbar navbar-expand-lg sticky-top" id="main_navbar">
+  <a style="font-weight: bold;color: #ffc107;font-size: 35px;font-family: Monotype Corsiva;margin-left:;margin-right:75px; padding: 0px;" class="navbar-brand " href="{% url 'ShopHome' %}">PerSquareFoot</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="fa fa-bars"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+				<ul class="navbar-nav mr-auto">
+
+					<li class="nav-item dropdown">
+						<a id="outdoorsignage" class="nav-link dropdown-toggle text-white" href="#" id="outdoorsignage" role="button" data-toggle="dropdown"aria-haspopup="true" aria-expanded="false">Outdoor Signage</a>
+						<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+
+							<li class="nav-item dropdown">
+								<a id="BillboardPrinting" class="dropdown-item dropdown-toggle text-white" href="#" id="BillboardPrinting" role="button" data-toggle="dropdown"
+									aria-haspopup="true" aria-expanded="false">
+									Billboard Printing (Hoardings)
+								</a>
+								<ul class="dropdown-menu" aria-labelledby="navbarDropdown1">
+									<li><a class="dropdown-item text-white" href="Hoarding/Signage Printing/Signage Printing.html">Signage Printing</a></li>
+									<li><a class="dropdown-item text-white" href="Hoarding/Hoardings/Hoardings.html">Hoardings Printing</a></li>
+									<!-- <div class="dropdown-divider"></div> -->
+									<li><a class="dropdown-item text-white" href="Hoarding/Wall Painting/Wall Painting.html">Wall Painting</a></li>
+
+									<li class="nav-item dropdown">
+										<a id="BannerPrinting" class="dropdown-item dropdown-toggle text-white" href="#" id="BannerPrinting" role="button" data-toggle="dropdown"
+											aria-haspopup="true" aria-expanded="false">
+											Banner Printing
+										</a>
+										<ul class="dropdown-menu" aria-labelledby="navbarDropdown1">
+											<li><a class="dropdown-item text-white" href="Hoarding/banner/Flex Banner Printing/Flex Banner Printing.html">Flex Banner Printing</a></li>
+											<li><a class="dropdown-item text-white" href="Hoarding/banner/Party Banners/Party Banners.html">Party Banners</a></li>
+											<!-- <div class="dropdown-divider"></div> -->
+											<li><a class="dropdown-item text-white" href="Hoarding/banner/Vinyl Banner/Vinyl Banner.html">Vinyl Mesh Banner</a></li>
+
+										</ul>
+									</li>
+									<li><a class="dropdown-item text-white" href="Hoarding/Sunpack Printing/Sunpack Printing.html">Sunpack Printing</a></li>
+									<li><a class="dropdown-item text-white" href="Hoarding/Road Directional Display Boards/Road Directional Display Boards.html">Road Directional Display Board</a></li>
+									<li><a class="dropdown-item text-white" href="Hoarding/Unipole/Unipole.html">UNIPOLE</a></li>
+									<li><a class="dropdown-item text-white" href="Hoarding/Wall Scroller/Wall Scroller.html">Wall Scroller</a></li>
+									<li><a class="dropdown-item text-white" href="Hoarding/Motion Display System/Motion Display System.html">Motion Display System</a></li>
+								</ul>
+							</li>
+							<li><a class="dropdown-item text-white" href="outdoor signage/Tri-vision Display/Tri-vision Display.html">Tri-vision</a></li>
+							<!--  <div class="dropdown-divider"></div> -->
+							<li><a class="dropdown-item text-white" href="outdoor signage/Sign Language/Sign Language.html">Sign Language</a></li>
+							<li><a class="dropdown-item text-white" href="outdoor signage/Bus Shelter/Bus Shelter.html">Bus Shelter</a></li>
+							<li><a class="dropdown-item text-white" href="outdoor signage/Public Utilities/Public Utilities.html">Public Utilities</a></li>
+							<li><a class="dropdown-item text-white" href="outdoor signage/Station Advertisment/Station Advertisment.html">Station Advertising</a></li>
+							<li><a class="dropdown-item text-white" href="outdoor signage/Airport Advertisment/Airport Advertisment.html">Airport Advertising</a></li>
+							<li><a class="dropdown-item text-white" href="outdoor signage/Pole Kiosk/Pole Kiosk.html">Pole Kiosk</a></li>
+							<li><a class="dropdown-item text-white" href="outdoor signage/Mobile Advertising/Mobile Advertising.html">Mobile Advertising</a></li>
+							<li><a class="dropdown-item text-white" href="outdoor signage/Automobile Graphics/Automobile Graphics.html">Automobile Graphics</a></li>
+
+							<li><a class="dropdown-item text-white" href="outdoor signage/Arch Display/Arch Display.html">Arch Display</a></li>
+							<li><a class="dropdown-item text-white" href="outdoor signage/Sky Balloons/Sky Balloons.html">Sky Balloons</a></li>
+						</ul>
+					</li>
+					<li class="nav-item dropdown">
+<a id="IndoorSignage" class="nav-link dropdown-toggle text-white" href="#" id="IndoorSignage" role="button" data-toggle="dropdown"
+							aria-haspopup="true" aria-expanded="false">
+							Indoor Signage
+						</a>
+						<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+							<li><a class="dropdown-item text-white" href="Indoor signage/LED Display System/LED Display System.html">LED Display System</a></li>
+
+							<!--  <div class="dropdown-divider"></div> -->
+							<li><a class="dropdown-item text-white" href="Indoor signage/Banner Stand/Banner Stand.html">Banner Stand</a></li>
+							<li><a class="dropdown-item text-white" href="Indoor signage/Roll Up Standee/Roll Up Standee.html">Roll Up Standees</a></li>
+							<li><a class="dropdown-item text-white" href="Indoor signage/Banner Scroller/Banner Scroller.html">Banner Scroller</a></li>
+							<li><a class="dropdown-item text-white" href="Indoor signage/Scroller Display System/Scroller Display System.html">Scroller Display System</a></li>
+							<li><a class="dropdown-item text-white" href="Indoor signage/Edge lit Signs/Edge lit Signs.html">Edge lit Signs</a></li>
+
+						</ul>
+					</li>
+					<li class="nav-item dropdown">
+						<a id="OtherServices" class="nav-link dropdown-toggle text-white" href="#" id="OtherServices" role="button" data-toggle="dropdown"
+							aria-haspopup="true" aria-expanded="false">
+							Other Services
+						</a>
+						<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+							<li><a class="dropdown-item text-white" href="other services/Cloth Banner/Cloth Banner.html">Cloth Banner</a></li>
+							<li><a class="dropdown-item text-white" href="other services/Foam Banner/Foam Banner.html">Foam Banner</a></li>
+							<!--  <div class="dropdown-divider"></div> -->
+
+							<li><a class="dropdown-item text-white" href="Hoarding/banner/Flex Banner Printing/Flex Banner Printing.html">Flex Printing</a></li>
+							<li><a class="dropdown-item text-white" href="Hoarding/Sunpack Printing/Sunpack Printing.html">Sun Pack Printing</a></li>
+
+
+						</ul>
+					</li>
+					<li class="nav-item dropdown">
+						<a id="PromotionalItems" class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+							aria-haspopup="true" aria-expanded="false">
+							Promotional Items
+						</a>
+						<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+							<li><a class="dropdown-item text-white" href="Promotional Items/Digital ID Card/Digital ID Card.html">Digital ID Cards</a></li>
+							<li><a class="dropdown-item text-white" href="Promotional Items/t-shirt Printing/t-shirt Printing.html">T-Shirt Printing</a></li>
+							<!--  <div class="dropdown-divider"></div> -->
+							<li><a class="dropdown-item text-white" href="Promotional Items/Cap Printing/Cap Printing.html">Cap Printing</a></li>
+							<li><a class="dropdown-item text-white" href="Promotional Items/Custom Mugs/Custom Mugs.html">Mug Printing</a></li>
+							<li><a class="dropdown-item text-white" href="Promotional Items/Custom Pens/Custom Pens.html">Pen Printing</a></li>
+							<li><a class="dropdown-item text-white" href="Promotional Items/Key Rings Printing/Key Rings Printing.html">Key Rings</a></li>
+							<li><a class="dropdown-item text-white" href="Promotional Items/Stepny Cover Printing/Stepny Cover Printing.html">Stepeny Covers</a></li>
+							<li><a class="dropdown-item text-white" href="Promotional Items/Momento Printing/Momento Printing.html">Momento</a></li>
+							<li><a class="dropdown-item text-white" href="Promotional Items/Umbrella Printing/Umbrella Printing.html">Umbrella</a></li>
+							<li class="nav-item dropdown">
+							<a id="CustomCanopy" class="dropdown-item dropdown-toggle text-white" href="#" id="CustomCanopy" role="button" data-toggle="dropdown"
+								aria-haspopup="true" aria-expanded="false">
+								Custom Canopy
+							</a>
+							<ul class="dropdown-menu" aria-labelledby="navbarDropdown1">
+								<li><a class="dropdown-item text-white" href="Promotional Items/Custom Canopy/Custom Canopy Tents/Custom Canopy Tents.html">Custom Canopy Tents</a></li>
+								<li><a class="dropdown-item text-white" href="Promotional Items/Custom Canopy/6x6 Canopy/6x6 Canopy.html">6x6 Canopy</a></li>
+								<!-- <div class="dropdown-divider"></div> -->
+								<li><a class="dropdown-item text-white" href="Promotional Items/Custom Canopy/Blank Canopy Tent/Blank Canopy Tent.html">Blank Canopy Tent</a></li>
+
+							</ul>
+						</li>
+							<li class="nav-item dropdown">
+							<a id="CustomCalendar" class="dropdown-item dropdown-toggle text-white" href="#" id="CustomCalendar" role="button" data-toggle="dropdown"
+								aria-haspopup="true" aria-expanded="false">
+								Custom Calendar
+							</a>
+							<ul class="dropdown-menu" aria-labelledby="navbarDropdown1">
+								<li><a class="dropdown-item text-white" href="Promotional Items/Calendar Printing/Desk Calendar/Desk Calendar.html">Desk Calendar</a></li>
+								<li><a class="dropdown-item text-white" href="Promotional Items/Calendar Printing/Wall Calendar/Wall Calendar.html">Wall Calendar</a></li>
+
+							</ul>
+						</li>
+						<li class="nav-item dropdown">
+							<a id="CustomClock" class="dropdown-item dropdown-toggle text-white" href="#" id="CustomClock" role="button" data-toggle="dropdown"
+								aria-haspopup="true" aria-expanded="false">
+								Custom Clock
+							</a>
+							<ul class="dropdown-menu" aria-labelledby="navbarDropdown1">
+								<li><a class="dropdown-item text-white" href="Promotional Items/Custom Clock/Desk Clock Printing/Desk Clock Printing.html">Desk Clock</a></li>
+								<li><a class="dropdown-item text-white" href="Promotional Items/Custom Clock/Wall Clock Printing/Wall Clock Printing.html">Wall Clock</a></li>
+								<li><a class="dropdown-item text-white" href="Promotional Items/Custom Clock/Wrist Clock Printing/Wrist Clock Printing.html">Wrist Clock</a></li>
+							</ul>
+						</li>
+						<li><a class="dropdown-item text-white" href="Promotional Items/Custom Diary/Custom Diary.html">Custom Diary</a></li>
+
+						</ul>
+					</li>
+					<li class="nav-item dropdown">
+						<a id="Alphabet Cutting" class="nav-link dropdown-toggle text-white" href="#" id="Alphabet Cutting" role="button" data-toggle="dropdown"
+							aria-haspopup="true" aria-expanded="false">
+							Alphabet Cutting
+						</a>
+						<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+							<li><a class="dropdown-item text-white" href="letter and number/Acrylic Letters and Numbers/Acrylic Letters and Numbers.html">Acrylic Letters and Numbers</a></li>
+							<li><a class="dropdown-item text-white" href="letter and number/Pinewood Letters and Numbers/Pinewood Letters and Numbers.html">Pinewood Letters and Numbers</a></li>
+
+
+						</ul>
+					</li>
+
+
+
+
+				</ul>
+			</div>
+
+		<a href="{% url 'cart' %}" class="btn btn-outline-warning my-sm-0 mx-4" data-toggle="tooltip" data-placement="bottom" id="popcart" title="Go to Shopping cart"><i class="fa fa-shopping-cart" aria-hidden="true"></i>
+			<text style="font-weight: bold">{% if not request.session.cart_items_total %} 0 {% else %} {{request.session.cart_items_total}}{% endif %}</text>
+		</a>
+		<form class="form-inline my-2 my-lg-0" role="search" action="/shop/search/">
+      		<input style="width: 60%;" class="form-control mr-sm-1" type="text" name="keywords" placeholder="Search" required >
+      		<button class="btn btn-outline-warning my-sm-0" data-toggle="tooltip" data-placement="bottom" id="search" title="Search for products" type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
+    	</form>
+		<div class="login_view">
+		{% if user.is_authenticated %}
+			<li class="nav-item dropdown">
+			<a style="margin: 0px 0px;" id="login-info" class="nav-link dropdown-toggle text-white btn btn-warning" href="{% url 'auth_logout' %}" id="login-info" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Welcome {{ user.username }}</a>
+				<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+					<li><a class="dropdown-item text-white btn btn-warning" href="{% url 'auth_logout' %}">Logout</a></li>
+					{% else %}
+					<li><a href="{% url 'auth_login' %}" class="btn btn-warning" style="color:white;">Login</a></li>
+					{% endif %}
+
+				</ul></li></div>
+</nav>
+    <!-- ......................................................................................................................... -->
+    {% block body %}   {% endblock%}
+  	{% include "modal.html" %}
+    <!--.............................Footer..................................-->
+    <footer class="ftco-footer ftco-section">
+			<div class="container">
+				<div class="row">
+					<div class="mouse">
+						<a href="#" class="mouse-icon">
+							<div class="mouse-wheel"><span><i class="fa fa-chevron-up"></i></span></div>
+						</a>
+					</div>
+				</div>
+				<div class="row mb-5">
+					<div class="col-md">
+						<div style="color: white;" class="ftco-footer-widget mb-4">
+							<h2 style="font-size: 35px;text-shadow: 1px 1px #000000;font-weight: bold;font-family: Monotype Corsiva" class="ftco-heading-2 text-warning">PerSquareFoot</h2>
+							<p>Shop the best with best price and with best Quality.</p>
+							<ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-5">
+								<li class="ftco-animate"><a href="#"><i class='fab fa-twitter' style='font-size:36px'></i></a></li>
+								<li class="ftco-animate"><a href="#"><i class='fab fa-facebook' style='font-size:36px'></i></a></li>
+								<li class="ftco-animate"><a href="#"><i class='fab fa-instagram' style='font-size:36px'></i></a></li>
+							</ul>
+						</div>
+					</div>
+					<div style="color: white;" class="col-md">
+						<div  class="ftco-footer-widget mb-4 ml-md-5">
+							<h2 class="ftco-heading-2">Menu</h2>
+							<ul style="color: white;" class="list-unstyled">
+								<li><a href="#" class="py-2 d-block">Shop</a></li>
+								<li><a href="About Us\About Us.html" class="py-2 d-block">About</a></li>
+								<li><a href="#" class="py-2 d-block">product list</a></li>
+								<li><a href="#" class="py-2 d-block">Contact Us</a></li>
+							</ul>
+						</div>
+					</div>
+					<div style="color: white;" class="col-md-4">
+						<div class="ftco-footer-widget mb-4">
+							<h2 class="ftco-heading-2">Help</h2>
+							<div class="d-flex">
+								<ul class="list-unstyled mr-l-5 pr-l-3 mr-4">
+									<li><a href="#" class="py-2 d-block">Shipping Information</a></li>
+									<li><a href="#" class="py-2 d-block">Cost Table</a></li>
+									<li><a href="#" class="py-2 d-block">Terms &amp; Conditions</a></li>
+									<li><a href="#" class="py-2 d-block">Privacy Policy</a></li>
+								</ul>
+								<ul class="list-unstyled">
+									<li><a href="#" class="py-2 d-block">FAQs</a></li>
+									<li><a href="#" class="py-2 d-block">Contact</a></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+					<div style="color: white;" class="col-md">
+						<div class="ftco-footer-widget mb-4">
+							<h2 class="ftco-heading-2">Have a Questions?</h2>
+							<div class="block-23 mb-3">
+								<ul style="list-style-type:none;">
+									<li><a href="#"><i class='fas fa-map-marker' style='font-size:20px'></i><span class="text">&nbsp; &nbsp; &nbsp;Dalpati,Church Road,Ranchi,<br>&nbsp; &nbsp; &nbsp;Jharkhand,India</span></a></li>
+									<br>
+									<li><a href="#"><i class='fas fa-phone-alt' style='font-size:20px'></i><span class="text">&nbsp; &nbsp; &nbsp;+919835321223</span></a></li>
+									<br>
+									<li><a href="#"><i class='fas fa-envelope' style='font-size:20px'></i><span class="text">&nbsp; &nbsp; &nbsp;bhagat.entp@rediffmail.com</span></a></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+
+			</div>
+
+	</footer>
+    <!-- ......................................................................................................................... -->
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+  	<script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.0.2/anime.min.js"></script>
+    <script src='https://kit.fontawesome.com/a076d05399.js'></script>
+    <script src="{% static 'shop/js/bootnavbar.js' %}"></script>
+    <script>
+		$(function () {
+		$('#main_navbar').bootnavbar({
+		//option
+		//animation: false
+		});
+		})
+	</script>
+	  <script>
+		$('document').ready(function() {
+		{% if not request.user.is_authenticated and not request.session.email_added_marketing and not "accounts" in request.get_full_path %}
+			function showModal(){
+				$('#marketingModal').modal('show');
+
+			}
+				t = setInterval(showModal, 8000);
+			$("#sendMarketingForm").click(function(e){
+				e.preventDefault()
+				var mForm =$("#sendForm").serialize()
+			$.ajax({
+			type: "POST",
+			url: "{% url 'ajax_email_signup' %}",
+			data: mForm,
+			success: function(data){
+			$("#modalMessage").html("<p style='color:#ffc107;'>"+ data +"</p>")
+				$('#marketingModal').modal('hide');
+				clearInterval(t);
+			},
+			error: function(data){
+			var obj = data.responseJSON
+			$("#modalMessage").html("<p style='color:red;'>"+ obj.email +"</p>")
+			},
+			});
+			});
+		{% endif %}
+		  });
+	  </script>
+	<script>
+		$('#popcart').tooltip({ boundary: 'window' })
+	</script>
+	<script>
+		$('#search').tooltip({ boundary: 'window' })
+	</script>
+        {% block script %}   {% endblock%}
+
+  </body>
+</html>
